@@ -4,6 +4,7 @@
 "qyh1001\main.o"
 "qyh1001\gpio.o"
 "qyh1001\tim.o"
+"qyh1001\usart.o"
 "qyh1001\stm32f4xx_it.o"
 "qyh1001\stm32f4xx_hal_msp.o"
 "qyh1001\stm32f4xx_hal_tim.o"
@@ -21,6 +22,7 @@
 "qyh1001\stm32f4xx_hal_cortex.o"
 "qyh1001\stm32f4xx_hal.o"
 "qyh1001\stm32f4xx_hal_exti.o"
+"qyh1001\stm32f4xx_hal_uart.o"
 "qyh1001\system_stm32f4xx.o"
 --strict --scatter "qyh1001\qyh1001.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
