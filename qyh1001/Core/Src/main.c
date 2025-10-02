@@ -91,8 +91,8 @@ int main(void)
   MX_GPIO_Init();
   MX_TIM1_Init();
   /* USER CODE BEGIN 2 */
-  //HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-  HAL_TIM_Base_Start(&htim1);
+  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+  //HAL_TIM_Base_Start(&htim1);
 
 
   /* USER CODE END 2 */
@@ -102,14 +102,14 @@ int main(void)
 
   while (1)
   {
-    if (__HAL_TIM_GetCounter(&htim1) > __HAL_TIM_GET_AUTORELOAD(&htim1) / 2) {
-      HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET );
-    }else {
-      HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_RESET);
-    }
-    // uint32_t arr_value = __HAL_TIM_GET_COUNTER(&htim1) + 1;
-    // uint32_t brightness = arr_value * sinf(4 * HAL_GetTick() / 1000.f) - 1;
-    // __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, brightness);
+    // if (__HAL_TIM_GetCounter(&htim1) > __HAL_TIM_GET_AUTORELOAD(&htim1) / 2) {
+    //   HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET );
+    // }else {
+    //   HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_RESET);
+    // }
+    uint32_t arr_value = __HAL_TIM_GET_COUNTER(&htim1) + 1;
+    uint32_t brightness = arr_value * sinf(4 * HAL_GetTick() / 1000.f) - 1;
+    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, brightness);
 
 		// if (HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin)== GPIO_PIN_SET) {
 		// 		HAL_IWDG_Refresh(&hiwdg);
