@@ -100,7 +100,8 @@ int main(void)
   //HAL_TIM_Base_Start(&htim1);
 	//HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET);
   uint8_t tx_msg[] = "RoboMaster";
-  HAL_UART_Receive_IT(&huart8, rx_msg, 1);
+  //HAL_UART_Receive_IT(&huart8, rx_msg, 1);
+	HAL_UART_Receive_IT(&huart8, rx_msg, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */

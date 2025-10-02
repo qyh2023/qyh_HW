@@ -23,13 +23,20 @@
 // }
 extern  uint8_t rx_msg[];
 
+// void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+//     if (huart == &huart8) {
+//         if (rx_msg[0] == 'R') {
+//             HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_RESET);
+//         }else if (rx_msg[0] == 'M') {
+//             HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET);
+//         }
+//         HAL_UART_Receive_IT(&huart8, rx_msg, 1);
+//     }
+// }
+
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-    if (huart == &huart8) {
-        if (rx_msg[0] == 'R') {
-            HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_RESET);
-        }else if (rx_msg[0] == 'M') {
-            HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET);
-        }
+    if(huart == &huart8) {
         HAL_UART_Receive_IT(&huart8, rx_msg, 1);
+        HAL_UART_Transmit(&huart8, rx_msg, 1, 1000);
     }
 }
