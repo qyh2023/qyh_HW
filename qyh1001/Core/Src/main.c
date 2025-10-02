@@ -34,9 +34,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-//int led_state = 0;   // 0红灯, 绿灯
-int key_last = 0;    // 初始化未按下
-int timer = 0;
+
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -47,7 +45,10 @@ int timer = 0;
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+//int led_state = 0;   // 0红灯, 绿灯
+int key_last = 0;    // 初始化未按下
+int timer = 0;
+uint8_t rx_msg[4];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -97,8 +98,9 @@ int main(void)
 	HAL_TIM_Base_Start_IT(&htim1);
   HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
   //HAL_TIM_Base_Start(&htim1);
-	HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET);
+	//HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET);
   uint8_t tx_msg[] = "RoboMaster";
+  HAL_UART_Receive_IT(&huart8, rx_msg, 1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -106,8 +108,8 @@ int main(void)
 
   while (1)
   {
-    HAL_UART_Transmit(&huart8, tx_msg, 10, 1000);
-    HAL_Delay(1000);
+    
+
     // if (__HAL_TIM_GetCounter(&htim1) > __HAL_TIM_GET_AUTORELOAD(&htim1) / 2) {
     //   HAL_GPIO_WritePin(LEDG_GPIO_Port, LEDG_Pin, GPIO_PIN_SET );
     // }else {
@@ -121,6 +123,9 @@ int main(void)
 		// if (HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin)== GPIO_PIN_SET) {
 		// 		HAL_IWDG_Refresh(&hiwdg);
 		// }
+
+    // HAL_UART_Transmit(&huart8, tx_msg, 10, 1000);
+    // HAL_Delay(1000);
 
     /* USER CODE END WHILE */
 
