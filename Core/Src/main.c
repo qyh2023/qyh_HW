@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "can.h"
+#include "tim.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -43,6 +45,25 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+CAN_RxHeaderTypeDef rx_header;
+CAN_TxHeaderTypeDef tx_header = {.StdId = 0x200,
+                                 .ExtId = 0,
+                                 .IDE = CAN_ID_STD,
+                                 .DLC = 8,
+                                 .TransmitGlobalTime = DISABLE};
+CAN_FilterTypeDef filter_config = {.FilterIdHigh = 0x0000,
+                                  .FilterIdLow = 0x0000,
+                                  .FilterMaskIdHigh = 0x0000,
+                                  .FilterMaskIdLow = 0x0000,
+                                  .FilterFIFOAssignment = CAN_FILTER_FIFO0,
+                                  .FilterBank = 0,
+                                  .FilterMode = CAN_FILTERMODE_IDMASK,
+                                  .FilterScale = CAN_FILTERSCALE_32BIT,
+                                  .FilterActivation = ENABLE};
+uint8_t rx_data[8];
+uint8_t tx_data[8] = {0x00, 0xc0, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00};
+
+
 
 /* USER CODE END PV */
 
@@ -86,18 +107,28 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_CAN1_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
-
+  
+	
+	  /* CAN过滤规则配置 */
+  HAL_CAN_ConfigFilter(&hcan1, &filter_config);
+  /* 启动CAN控制器 */
+  HAL_CAN_Start(&hcan1);
+  /* 激活CAN接收中断，FIFO0中有待处理报文时触发中断 */
+  HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+  /* 启动定时器6并使能中断 */
+	HAL_TIM_Base_Start_IT(&htim6);
+	
+	
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_WritePin(LEDR_GPIO_Port, LEDR_Pin, GPIO_PIN_RESET);
-    HAL_Delay(1000);
-    HAL_GPIO_WritePin(LEDR_GPIO_Port, LEDR_Pin, GPIO_PIN_SET);
-    HAL_Delay(1000);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
