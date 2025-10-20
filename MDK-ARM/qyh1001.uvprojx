@@ -531,6 +531,11 @@
               <FileType>8</FileType>
               <FilePath>..\Core\Src\callback.cpp</FilePath>
             </File>
+            <File>
+              <FileName>pid.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Core\Src\pid.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

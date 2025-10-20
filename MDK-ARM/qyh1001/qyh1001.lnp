@@ -7,6 +7,7 @@
 "qyh1001\stm32f4xx_hal_msp.o"
 "qyh1001\main.o"
 "qyh1001\callback.o"
+"qyh1001\pid.o"
 "qyh1001\stm32f4xx_hal_can.o"
 "qyh1001\stm32f4xx_hal_rcc.o"
 "qyh1001\stm32f4xx_hal_rcc_ex.o"
