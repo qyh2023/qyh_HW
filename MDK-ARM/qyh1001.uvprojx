@@ -536,6 +536,11 @@
               <FileType>8</FileType>
               <FilePath>..\Core\Src\pid.cpp</FilePath>
             </File>
+            <File>
+              <FileName>motor.cpp</FileName>
+              <FileType>8</FileType>
+              <FilePath>..\Core\Src\motor.cpp</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

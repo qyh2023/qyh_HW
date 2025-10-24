@@ -22,16 +22,78 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 D:\RM\Project1001\MDK-ARM\qyh1001.uvprojx
-Project File Date:  10/19/2025
+Project File Date:  10/21/2025
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.19', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'qyh1001'
-compiling main.c...
+../Core/Src/motor.cpp(4): warning: In file included from...
+../Core/Inc\motor.h(15): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float accm_angle_ = 0.f; // deg 输出端(减速后)累计转动角度
+                      ^
+../Core/Inc\motor.h(16): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float delta_angle_ = 0.f; // deg 输出端(减速后)新转动的角度
+                       ^
+../Core/Inc\motor.h(17): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float bias_ = 0.f;
+                ^
+../Core/Inc\motor.h(19): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float ecd_angle_ = 0.f; // deg 当前编码器角度
+                     ^
+../Core/Inc\motor.h(20): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float last_ecd_angle_ = 0.f; // deg 上次编码器角度
+                          ^
+../Core/Inc\motor.h(21): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float delta_ecd_angle_ = 0.f; // deg 编码器新转动的角度
+                           ^
+../Core/Inc\motor.h(22): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float accm_ecd_angle_ = 0.f; //编码器累计转动角度
+                          ^
+../Core/Inc\motor.h(24): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float rotate_speed_ = 0.f; // dps 反馈转子转速 (degree per second)
+                        ^
+../Core/Inc\motor.h(25): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float temp_ = 0.f; // °C  反馈电机温度
+                ^
+../Core/Inc\motor.h(27): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float target_angle_ = 0, fdb_angle_ = 0;
+                        ^
+../Core/Inc\motor.h(27): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float target_angle_ = 0, fdb_angle_ = 0;
+                                        ^
+../Core/Inc\motor.h(28): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float target_speed_ = 0, fdb_speed_ = 0, feedforward_speed_ = 0;
+                        ^
+../Core/Inc\motor.h(28): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float target_speed_ = 0, fdb_speed_ = 0, feedforward_speed_ = 0;
+                                        ^
+../Core/Inc\motor.h(28): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float target_speed_ = 0, fdb_speed_ = 0, feedforward_speed_ = 0;
+                                                                ^
+../Core/Inc\motor.h(29): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float target_torque_ = 0.f, fdb_torque_ = 0.f;
+                         ^
+../Core/Inc\motor.h(29): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float target_torque_ = 0.f, fdb_torque_ = 0.f;
+                                            ^
+../Core/Inc\motor.h(30): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float feedforward_intensity_ = 0, output_intensity_ = 0;
+                                 ^
+../Core/Inc\motor.h(30): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float feedforward_intensity_ = 0, output_intensity_ = 0;
+                                                        ^
+../Core/Inc\motor.h(33): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float torque_ = 0.f;
+                  ^
+../Core/Inc\motor.h(34): warning: default member initializer for non-static data member is a C++11 extension [-Wc++11-extensions]
+    float current_ = 0.f; // A   反馈转矩电流
+                   ^
+20 warnings generated.
+compiling motor.cpp...
 linking...
-Program Size: Code=7104 RO-data=480 RW-data=84 ZI-data=1892  
+Program Size: Code=12824 RO-data=516 RW-data=80 ZI-data=2152  
 FromELF: creating hex file...
-"qyh1001\qyh1001.axf" - 0 Error(s), 0 Warning(s).
+"qyh1001\qyh1001.axf" - 0 Error(s), 20 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -54,7 +116,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE:5.6.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

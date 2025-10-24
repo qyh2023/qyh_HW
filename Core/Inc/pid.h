@@ -26,12 +26,12 @@
 class PID {
 public:
     PID() {
-        kp_ = 0;
+        kp_ = 0.00007;
         ki_ = 0;
-        kd_ = 0;
-        i_max_ = 0;
-        out_max_ = 0;
-        d_filter_k_ = 1;
+        kd_ = 0.007;
+        i_max_ = 3;
+        out_max_ = 3;
+        d_filter_k_ = 0.92;
         reset();
     }
 
@@ -46,7 +46,7 @@ public:
     }
 
     void reset();
-    float calc(float ref, float fdb);
+    float calc(const float ref, const float fdb);
 
     float kp_, ki_, kd_, d_filter_k_;
     float i_max_, out_max_;

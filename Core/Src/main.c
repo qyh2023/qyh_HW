@@ -62,7 +62,7 @@ CAN_FilterTypeDef filter_config = { .FilterIdHigh = 0x0000,
                                     .FilterActivation = ENABLE };
 uint8_t rx_data[8];
 uint8_t tx_data[8] = {
-    0x00, 0x00, 0x00, 0xc0, 0x00, 0x00, 0x00, 0x00
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 }; // 发送的信息（控制电流值） 0/2/4/6高8位  1/3/5/7低8位
 // 标识符0x200对应电调ID1~4   标识符0x1FF对应电调ID1~4
 
