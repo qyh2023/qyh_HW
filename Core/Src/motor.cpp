@@ -56,7 +56,11 @@ void M3508_Motor::handle(void) {
         case 0x01:
             SetSpeed(spid_output, 0);
             break;
-
+        case STOP:
+            // SetSpeed(0, 0);
+            tx_data[0] = 0;
+            tx_data[1] = 0;
+            break;
             // case POSITION_SPEED:
             //     float ppid_output = ppid_.calc(target_speed_, fdb_speed_); // 单位：力矩
             //     SetPosition(ppid_output, 0, 0);
@@ -72,7 +76,7 @@ void M3508_Motor::handle(void) {
 // 读到的电流 转化为力矩
 float i_2_torque(float I) {
     float torque;
-    if (I >= 0. && I <= 8.) {
+    if (I > 0. && I <= 8.) {
         torque = (I - 0.5) / 2.5;
     } else if (I >= 8. && I <= 11.3) {
         torque = (I + 1.9) / 3.3;
@@ -89,9 +93,9 @@ float i_2_torque(float I) {
 float torque_2_i(float torque) {
     float i;
     if (torque >= -3. && torque <= 3.) {
-        i = (torque >= 0) ? (2.5 * torque + 0.5) : (2.5 * torque - 0.5);
+        i = (torque > 0) ? (2.5 * torque + 0.5) : (2.5 * torque - 0.5);
     } else if ((torque >= 3. && torque <= 4.) || (torque >= -4. && torque <= -3.)) {
-        i = (torque >= 0) ? (3.3 * torque - 1.9) : (3.3 * torque + 1.9);
+        i = (torque > 0) ? (3.3 * torque - 1.9) : (3.3 * torque + 1.9);
     } else {
         return 0;
     }

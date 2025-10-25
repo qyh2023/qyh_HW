@@ -13,10 +13,12 @@ extern CAN_TxHeaderTypeDef tx_header;
 extern uint8_t tx_data[8];
 extern uint8_t rx_data[8];
 extern uint32_t can_tx_mail_box;
+extern uint8_t stop_flag;
 
 extern M3508_Motor Motor;
 PID pid;
 bool bias_flag = true;
+int counter = 0; // 0.001s 数一次  0.15s是  150次
 
 float linear_mapping(float in, int in_min, int in_max, float out_min, float out_max) {
     float ans = out_min + (out_max - out_min) / (in_max - in_min) * (in - in_min);
@@ -37,6 +39,28 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef* hcan) {
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef* htim) {
     if (htim->Instance == htim6.Instance) {
+        // 检测下降沿
+        if (HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin) == 1 && stop_flag == 1) {
+            counter += 1;
+            if (counter == 150 && HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin) == 1) {
+                stop_flag = 0;
+                counter = 0;
+            }
+        }
+        if (stop_flag == 0) {
+            // 停电机
+            Motor.control_method_ = M3508_Motor::STOP;
+            // 检测下降沿
+            if (HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin) == 1 && stop_flag == 0) {
+                counter += 1;
+                if (counter == 150 && HAL_GPIO_ReadPin(KEY_GPIO_Port, KEY_Pin) == 1) {
+                    stop_flag = 1;
+                    counter = 0;
+                    Motor.control_method_ = M3508_Motor::TORQUE;
+                }
+            }
+        }
+
         // 发送 CAN 报文
         HAL_CAN_AddTxMessage(&hcan1, &tx_header, tx_data, CAN_FilterFIFO0);
     }

@@ -48,11 +48,7 @@ public:
     void SetPosition(float target_position, float feedforward_speed, float feedforward_intensity);
     void SetSpeed(float target_speed, float feedforward_intensity);
     void SetIntensity(float intensity);
-    enum {
-        TORQUE,
-        SPEED,
-        POSITION_SPEED,
-    } control_method_;
+    enum { TORQUE, SPEED, POSITION_SPEED, STOP } control_method_;
 };
 
 #endif //PROJECT1001_MOTOR_H
